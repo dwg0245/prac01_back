@@ -19,5 +19,12 @@ public class BoardController {
         BoardDto.RegRes result = boardService.register(dto);
         return ResponseEntity.ok(result);
     }
+
+
+    @GetMapping("/list")
+    public ResponseEntity list() {
+        List<BoardDto.ListRes> dto = boardService.list();
+        return ResponseEntity.ok(dto);
+    }
 }
 
