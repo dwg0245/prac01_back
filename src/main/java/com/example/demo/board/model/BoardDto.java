@@ -1,7 +1,9 @@
 package com.example.demo.board.model;
 
-import com.example.demo.user.model.User;
+import com.example.demo.reply.model.ReplyDto;
 import lombok.*;
+
+import java.util.List;
 
 public class BoardDto {
     @Getter
@@ -39,12 +41,16 @@ public class BoardDto {
         private Long idx;
         private String title;
         private String username;
+        private long replySize;
+        private int likes;
 
         public static ListRes from(Board entity) {
             return ListRes.builder()
                     .idx(entity.getIdx())
                     .title(entity.getTitle())
                     .username(entity.getUser().getName())
+                    .replySize(entity.getReplyList().size())
+                    .likes(entity.getLikes().size())
                     .build();
         }
     }
@@ -56,6 +62,8 @@ public class BoardDto {
         private String title;
         private String contents;
         private String username;
+        private List<ReplyDto.Replyres> reply;
+        private int likes;
 
         public static ReadRes from(Board entity) {
             return ReadRes.builder()
@@ -63,6 +71,8 @@ public class BoardDto {
                     .title(entity.getTitle())
                     .contents(entity.getContents())
                     .username(entity.getUser().getName())
+                    .reply(entity.getReplyList().stream().map(ReplyDto.Replyres::from).toList())
+                    .likes(entity.getLikes().size())
                     .build();
         }
     }

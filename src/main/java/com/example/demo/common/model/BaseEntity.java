@@ -21,7 +21,7 @@ public class BaseEntity {
     @Column(name = "create_date", updatable = false, nullable = false) //
     private Date createdAt;
 
-    @Column(name = "update_date", nullable = false ) // updatable = false 비어 있을 수 없음
+    @Column(name = "update_date", nullable = false ) // nullable = false 비어 있을 수 없음
     private Date updatedAt;
 
     @PrePersist // 저장이 될때 변경
@@ -29,6 +29,7 @@ public class BaseEntity {
         this.createdAt = Timestamp.from(Instant.now());
         this.updatedAt = Timestamp.from(Instant.now());
     }
+
     @PreUpdate // 수정이 될때 변경
     void updateAt(){
         this.updatedAt = Timestamp.from(Instant.now());

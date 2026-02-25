@@ -1,6 +1,8 @@
 package com.example.demo.user.model;
 
 import com.example.demo.board.model.Board;
+import com.example.demo.likes.model.Likes;
+import com.example.demo.reply.model.Reply;
 import jakarta.persistence.*;
 import lombok.*;
 import org.apache.logging.log4j.util.Lazy;
@@ -28,4 +30,10 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Board> borderList;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Reply> replyList;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Likes>  likes;
 }
