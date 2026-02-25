@@ -1,11 +1,17 @@
+# 내가 뭔가를 쓰고 싶을때 변수 처럼 쓴다.
+jwt:
+  secret: ${JWT_SECRET}
+  expire: ${JWT_EXPIRE}
+
+
 spring:
   application:
     name: spring04
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ddarahakit2026@gmail.com
-    password: vvxecvdyhyryhtpt
+    username: ${MAIL_ADDR}
+    password: ${MAIL_PASS}
     properties:
       mail:
         smtp:
@@ -16,9 +22,9 @@ spring:
           timeout: 5000
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: "jdbc:mariadb://192.168.23.30:3306/web"
-    username: root
-    password: qwer1234
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   jpa:
     database-platform: org.hibernate.dialect.MariaDBDialect
