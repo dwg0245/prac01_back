@@ -2,6 +2,7 @@ package com.example.demo.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import static com.example.demo.common.model.BaseResponseStatus.SUCCESS;
@@ -21,6 +22,14 @@ public class BaseResponse <T>{
                 SUCCESS.getCode(),
                 SUCCESS.getMessage(),
                 result);
+    }
+
+    public static <T> BaseResponse fail(BaseResponseStatus status) {
+        return new BaseResponse(
+                status.isSuccess(),
+                status.getCode(),
+                status.getMessage(),
+                null);
     }
 
     public static <T> BaseResponse fail(BaseResponseStatus status,T result) {
