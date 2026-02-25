@@ -10,6 +10,7 @@ public class BDto {
         private Long idx;
         private String b01;
         private String b02;
+        private Long AIdx; // ADto의 idx 가져오기
 
         public static BRes from(B entity){
             return BRes.builder()

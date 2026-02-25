@@ -2,12 +2,14 @@ package com.example.demo.board.model;
 
 import com.example.demo.common.model.BaseEntity;
 
+import com.example.demo.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+// 다
 @Builder
 @Getter
 @AllArgsConstructor
@@ -19,6 +21,10 @@ public class Board extends BaseEntity {
     private Long idx;
     private String title;
     private String contents;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userIdx")
+    private User user;
 
     public void update(BoardDto.RegReq dto) {
         this.title = dto.getTitle();

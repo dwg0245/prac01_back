@@ -1,5 +1,6 @@
 package com.example.demo.board.model;
 
+import com.example.demo.user.model.User;
 import lombok.*;
 
 public class BoardDto {
@@ -37,11 +38,13 @@ public class BoardDto {
     public static class ListRes {
         private Long idx;
         private String title;
+        private String username;
 
         public static ListRes from(Board entity) {
             return ListRes.builder()
                     .idx(entity.getIdx())
                     .title(entity.getTitle())
+                    .username(entity.getUser().getName())
                     .build();
         }
     }
@@ -52,12 +55,14 @@ public class BoardDto {
         private Long idx;
         private String title;
         private String contents;
+        private String username;
 
         public static ReadRes from(Board entity) {
             return ReadRes.builder()
                     .idx(entity.getIdx())
                     .title(entity.getTitle())
                     .contents(entity.getContents())
+                    .username(entity.getUser().getName())
                     .build();
         }
     }
