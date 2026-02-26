@@ -1,7 +1,11 @@
 package com.example.demo.user.model;
 
+import com.example.demo.board.model.Board;
+import com.example.demo.board.model.BoardDto;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.util.List;
 
 public class UserDto {
 
