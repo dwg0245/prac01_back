@@ -1,5 +1,6 @@
 package com.example.demo.config.filter;
 
+import com.example.demo.user.model.AuthUserDetails;
 import com.example.demo.utils.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -37,11 +38,20 @@ public class JwtFilter extends OncePerRequestFilter {
             for (Cookie cookie : request.getCookies()) {
                 if (cookie.getName().equals("ATOKEN")) {
                     // JwtUtil에서 토큰 생성 및 확인하도록 리팩토링
-                    String username = jwtUtil.getUsername(cookie.getValue());
-                    String role = jwtUtil.getRole(cookie.getValue());
+
+                    Long idx = JwtUtil.getUserIdx(cookie.getValue());
+                    String username = JwtUtil.getUsername(cookie.getValue());
+                    String role = JwtUtil.getRole(cookie.getValue());
+
+                    // 담아줘야 컨트롤러에서 받아 볼 수 있다.
+                    AuthUserDetails user = AuthUserDetails.builder()
+                            .idx(idx)
+                            .username(username)
+                            .role(role )
+                            .build();
 
                     Authentication authentication = new UsernamePasswordAuthenticationToken(
-                            username,
+                            user,
                             null,
                             List.of(new SimpleGrantedAuthority(role))
                     );

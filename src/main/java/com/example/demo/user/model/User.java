@@ -1,11 +1,16 @@
 package com.example.demo.user.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.demo.board.model.Board;
+import com.example.demo.likes.model.Likes;
+import com.example.demo.reply.model.Reply;
+import jakarta.persistence.*;
 import lombok.*;
+import org.apache.logging.log4j.util.Lazy;
 
+import javax.swing.border.Border;
+import java.util.List;
+
+// 일
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -22,4 +27,13 @@ public class User {
     @Setter
     private boolean enable;
     private String role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Board> borderList;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Reply> replyList;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Likes>  likes;
 }
