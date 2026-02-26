@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -17,9 +18,12 @@ import java.net.URI;
 @RequestMapping("/user")
 @RestController
 @RequiredArgsConstructor
+
 public class UserController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+
 
     @PostMapping("/signup")
     public ResponseEntity signup(@RequestBody UserDto.SignupReq dto) {
@@ -38,7 +42,7 @@ public class UserController {
         AuthUserDetails user = (AuthUserDetails) authentication.getPrincipal();
 
         if(user != null) {
-            String jwt = JwtUtil.createToken(user.getIdx(), user.getUsername(), user.getRole());
+            String jwt = jwtUtil.createToken(user.getIdx(), user.getUsername(), user.getRole());
             return ResponseEntity.ok().header("Set-Cookie", "ATOKEN=" + jwt + "; Path=/").build();
         }
 
