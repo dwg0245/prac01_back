@@ -2,6 +2,7 @@ package com.example.demo.upload;
 
 import com.example.demo.utils.UploadUtill;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,9 +11,12 @@ import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-@Service
+//@Service
 public class LocalUploadService implements UploadService {
     private final UploadUtill uploadUtill;
+    @Value("${project.upload.path}")
+    private String defaultUploadPath;
+
     public String saveFile(MultipartFile file){
         String uploadPath = uploadUtill.makeFolder(); // 오늘 날짜로 파일 생기게 하기
 
@@ -23,10 +27,7 @@ public class LocalUploadService implements UploadService {
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return uploadPath;
-
-
     }
 
     @Override
@@ -38,6 +39,8 @@ public class LocalUploadService implements UploadService {
 //        }
 //
 //        return uploadPathList;
+
+        // 어떤 게시글의 이미지인지 DB에 저장
 
         return fileList.stream().map(this::saveFile).toList();
     }
