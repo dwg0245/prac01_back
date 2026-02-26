@@ -1,6 +1,5 @@
 package com.example.demo.common.exception;
 
-import com.example.demo.common.model.BaseResponse;
 import com.example.demo.common.model.BaseResponseStatus;
 import lombok.Getter;
 

@@ -1,12 +1,18 @@
 package com.example.demo.relation.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 // N
 // 다측에 외래키가 생긴다.
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class B {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
