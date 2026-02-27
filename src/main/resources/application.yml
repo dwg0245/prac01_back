@@ -1,4 +1,3 @@
-# 내가 뭔가를 쓰고 싶을때 변수 처럼 쓴다.
 jwt:
   secret: ${JWT_SECRET}
   expire: ${JWT_EXPIRE}

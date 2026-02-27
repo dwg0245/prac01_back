@@ -17,6 +17,10 @@ public enum BaseResponseStatus {
     SIGNUP_INVALID_UUID (false, 3005,"유효하지 않은 인증 값입니다. 이메일 인증을 다시 시도해주세요."),
     LOGIN_INVALID_USERINFO(false,3006,"이메일이나 비밀번호를 확인해주세요."),
 
+    // 4000번대 실패
+    REQUEST_ERROR(false,4000,"입력값을 확인하세요"),
+
+
     // 5000번대 실패
     FAIL(false, 5000,"요청에 실해하였습니다.");
 
