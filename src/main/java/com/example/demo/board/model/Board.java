@@ -23,6 +23,10 @@ public class Board extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
+
+    // 무결성 제약 조건 달기
+    // nullable = false - 비워두면 안된다.| length = 100 - 글자 수 제한
+    @Column(nullable = false, length = 100)
     private String title;
     private String contents;
 

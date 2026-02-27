@@ -21,7 +21,7 @@ public class UserDto {
                     .name(this.name)
                     .password(this.password)
                     .enable(false)
-                    .role("ROLE_USER")
+                    // .role("ROLE_USER") 직접 쓰기 보다는 // User 에티티에 도메인 무결성으로 해주기
                     .build();
         }
     }
