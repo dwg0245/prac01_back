@@ -3,9 +3,25 @@ jwt:
   secret: ${JWT_SECRET}
   expire: ${JWT_EXPIRE}
 
+
+project:
+  upload:
+    path: ${UPLOAD_PATH}
+
 spring:
   application:
     name: spring04
+
+  cloud:
+    aws:
+      credentials:
+        access-key: ${AWS_ACCESS_KEY}
+        secret-key: ${AWS_SECRET_KEY}
+      s3:
+        bucket: ${S3_bucket}
+      region:
+        static: ap-northeast-2
+
   mail:
     host: smtp.gmail.com
     port: 587
