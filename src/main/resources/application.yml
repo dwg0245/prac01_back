@@ -3,6 +3,7 @@ jwt:
   secret: ${JWT_SECRET}
   expire: ${JWT_EXPIRE}
 
+
 project:
   upload:
     path: ${UPLOAD_PATH}
