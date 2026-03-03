@@ -3,10 +3,32 @@ package com.example.demo.board.model;
 import com.example.demo.reply.model.ReplyDto;
 import com.example.demo.user.model.User;
 import lombok.*;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public class BoardDto {
+    @Getter
+    @Builder
+    // 페이지 응답 dto 만들기
+    public static class PageRes{
+        private List<ListRes> boardList;
+        private int totalPage;
+        private long totalCount;
+        private int currentPage;
+        private int currentSize;
+
+        public static PageRes from(Page<Board> result){
+            return PageRes.builder()
+                    .boardList(result.get().map(BoardDto.ListRes::from).toList())
+                    .totalPage(result.getTotalPages())
+                    .totalCount(result.getTotalElements())
+                    .currentPage(result.getPageable().getPageNumber())
+                    .currentSize(result.getPageable().getPageSize())
+                    .build();
+        }
+    }
+
 
     @Getter
     @Builder
