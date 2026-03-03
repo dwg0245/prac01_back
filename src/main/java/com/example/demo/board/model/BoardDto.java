@@ -2,6 +2,7 @@ package com.example.demo.board.model;
 
 import com.example.demo.reply.model.ReplyDto;
 import com.example.demo.user.model.User;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.util.List;
@@ -29,6 +30,8 @@ public class BoardDto {
 
     @Getter
     public static class RegReq {
+        // DTO에도 달아줄 수 있음
+        @Schema()
         private String title;
         private String contents;
 

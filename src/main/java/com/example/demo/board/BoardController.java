@@ -2,6 +2,8 @@ package com.example.demo.board;
 
 import com.example.demo.common.model.BaseResponse;
 import com.example.demo.user.model.AuthUserDetails;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import com.example.demo.board.model.BoardDto;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +16,13 @@ import java.util.List;
 @RequestMapping("/board")
 @RestController
 @RequiredArgsConstructor
+
+// 컨트롤러 이름 바꾸기
+@Tag(name = "게시판 기능")
 public class BoardController {
     private final BoardService boardService;
 
+    @Operation(summary = "게시글 등록")
     @PostMapping("/reg")
     public ResponseEntity register(@RequestBody BoardDto.RegReq dto) {
         BoardDto.RegRes result = boardService.register(dto);
