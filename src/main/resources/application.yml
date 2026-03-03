@@ -6,6 +6,9 @@ jwt:
 project:
   upload:
     path: ${UPLOAD_PATH}
+  aes:
+    #32 바이트 (32글자 여야 한다.)
+    key: aessecretkey12345678912345678900
 
 
 
