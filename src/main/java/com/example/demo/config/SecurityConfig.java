@@ -64,10 +64,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.oauth2Login(config ->{
+            // 유저 정보를 가지고 올 때 실행
+            // 로그인을 시도해서 카카오가 인증 코드를 보내주면, 그 뒤에 유저 정보를 가져올 때 내가 지정한 서비스를 실행
             config.userInfoEndpoint(
                     endpoint -> endpoint.userService(oAuth2UserService)
             );
-            config.successHandler(oAuth2AuthenticationSuccessHandler); // 성공 처리
+            // 로그인 성공시 처리
+            config.successHandler(oAuth2AuthenticationSuccessHandler);
         });
 
         http.authorizeHttpRequests(

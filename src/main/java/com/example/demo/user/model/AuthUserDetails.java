@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Getter
 @Builder
-// 성공 했을때 반환하는 DTO
+// 성공 했을때 반환하는 스프링 시큐리티 DTO
 public class AuthUserDetails implements UserDetails, OAuth2User {
     private Long idx;
     private String username;
