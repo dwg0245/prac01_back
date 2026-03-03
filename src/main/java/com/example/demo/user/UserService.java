@@ -55,6 +55,7 @@ public class UserService implements UserDetailsService {
         );
 
         return AuthUserDetails.from(user);
+
     }
 
     public void verify(String uuid) {

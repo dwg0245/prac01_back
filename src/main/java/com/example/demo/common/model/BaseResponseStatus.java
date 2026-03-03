@@ -18,7 +18,8 @@ public enum BaseResponseStatus {
     LOGIN_INVALID_USERINFO(false,3006,"이메일이나 비밀번호를 확인해주세요."),
 
     // 5000번대 실패
-    FAIL(false, 5000,"요청에 실해하였습니다.");
+    FAIL(false, 5000,"요청에 실해하였습니다."),
+    REQUEST_ERROR(false, 5000,"요청에 실해하였습니다." );
 
     private final boolean success;
     private final Integer code;

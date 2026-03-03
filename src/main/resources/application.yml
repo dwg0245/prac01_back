@@ -88,5 +88,7 @@ spring:
         static: ap-northeast-2
 logging:
   level:
+    # 개바은 디버그
+    com.example.demo: debug
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace
