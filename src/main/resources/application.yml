@@ -1,29 +1,50 @@
 # 내가 뭔가를 쓰고 싶을때 변수 처럼 쓴다.
+#토큰
 jwt:
   secret: ${JWT_SECRET}
   expire: ${JWT_EXPIRE}
 
+# 이미지 업로드 경로
 project:
   upload:
     path: ${UPLOAD_PATH}
+
   aes:
     #32 바이트 (32글자 여야 한다.)
     key: aessecretkey12345678912345678900
 
-project:
-  upload:
-    path: ${UPLOAD_PATH}
-
 spring:
+  # DB 설정
+  datasource:
+    master:
+      driver-class-name: org.mariadb.jdbc.Driver
+      username: ${DB_USER}
+      password: ${DB_PASS}
+      jdbc-url: ${MASTER_DB_URL}
+    slave:
+      driver-class-name: org.mariadb.jdbc.Driver
+      username: ${DB_USER}
+      password: ${DB_PASS}
+      jdbc-url: ${SLAVE_DB_URL}
+
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
   security:
     oauth2:
       client:
         registration:
+          # 카카오 소셜 로그인 설정
           kakao:
             client-id: ${KAKAO_CLIENT_ID}
             client-secret: ${KAKAO_CLIENT_SECRET}
             client-name: kakao
-            redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+            redirect-uri: ${KAKAO_REDIRECT_URI}
             # 카카오 로그인하기 할때, 따로 설정을 해야 됨
             authorization-grant-type: authorization_code
               # 어떤걸 받아 갈 건지
@@ -40,6 +61,7 @@ spring:
   application:
     name: spring04
 
+  # AWS 설정
   cloud:
     aws:
       credentials:
@@ -50,6 +72,7 @@ spring:
       region:
         static: ap-northeast-2
 
+ # 이메일 인증 설정
   mail:
     host: smtp.gmail.com
     port: 587
@@ -63,29 +86,9 @@ spring:
             required: true
           auth: true
           timeout: 5000
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASS}
 
-  jpa:
-    database-platform: org.hibernate.dialect.MariaDBDialect
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        format_sql: true
 
-  cloud:
-    aws:
-      credentials:
-        access-key: ${AWS_ACCESS_KEY}
-        secret-key: ${AWS_SECRET_KEY}
-      s3:
-        bucket: ${S3_BUCKET}
-      region:
-        static: ap-northeast-2
+# 로깅 설정
 logging:
   level:
     org.hibernate.SQL: debug

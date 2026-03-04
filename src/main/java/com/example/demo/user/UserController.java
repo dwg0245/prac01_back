@@ -37,9 +37,9 @@ public class UserController {
     public ResponseEntity login(@RequestBody UserDto.LoginReq dto) {
         UsernamePasswordAuthenticationToken token =
                 new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword(), null);
-
         Authentication authentication = authenticationManager.authenticate(token);
         AuthUserDetails user = (AuthUserDetails) authentication.getPrincipal();
+
 
         if(user != null) {
             String jwt = jwtUtil.createToken(user.getIdx(), user.getUsername(), user.getRole());

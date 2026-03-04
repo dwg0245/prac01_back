@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class BoardService {
         return BoardDto.RegRes.from(entity);
     }
 
+    // Transactional(readOnly = true) 가 안 달려 있으면 master에서 실행
     public BoardDto.PageRes list(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page,size);
 
@@ -33,11 +35,15 @@ public class BoardService {
         //return result.stream().map(BoardDto.ListRes::from).toList();
     }
 
+    // 데이터 소스 객체 읽어 오기
+    @Transactional(readOnly = true)
     public BoardDto.ReadRes read(Long idx) {
         Board board = boardRepository.findById(idx).orElseThrow();
         return BoardDto.ReadRes.from(board);
     }
 
+    // SQL문이 두개 이상 일어나면 이렇게 사용해서 하나로 묶어주기
+    @Transactional
     public BoardDto.RegRes update(Long idx, BoardDto.RegReq dto) {
         Board board = boardRepository.findById(idx).orElseThrow();
         board.update(dto);
