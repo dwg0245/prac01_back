@@ -17,10 +17,6 @@ public class UploadUtill {
     private String defaultUploadPath;
 
     public String makeFolder() {
-        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-
-        String folderPath = date.replace("/", File.separator);
-    public String makeFolder() {
         // 오늘 날짜로 시간 받아오기
         String data = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 

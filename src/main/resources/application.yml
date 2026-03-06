@@ -1,4 +1,7 @@
 # 내가 뭔가를 쓰고 싶을때 변수 처럼 쓴다.
+server:
+  port: 8083
+
 jwt:
   secret: ${JWT_SECRET}
   expire: ${JWT_EXPIRE}
@@ -86,7 +89,9 @@ spring:
         bucket: ${S3_BUCKET}
       region:
         static: ap-northeast-2
+
 logging:
   level:
+    com.example.demo: debug
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace
