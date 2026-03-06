@@ -20,6 +20,10 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // 웹소켓 연결 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
     // 스프링 시큐리티 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-mail'

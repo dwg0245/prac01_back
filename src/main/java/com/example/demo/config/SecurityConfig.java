@@ -66,7 +66,23 @@ public class SecurityConfig {
     }
 
     @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration); // 모든 경로에 대해 CORS 적용
+        return source;
+    }
+
+    @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+        // DORS 해결
+        http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
+
         // 세션 id를 설정할 필요가 없다. 라고 설정, 일반 로그인 세션을 끄는거라 소셜 로그인에는 적용이 안됨
         http.sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

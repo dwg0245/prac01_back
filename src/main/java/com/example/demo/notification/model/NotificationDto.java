@@ -20,5 +20,11 @@ public class NotificationDto {
         }
     }
 
+    @Getter
+    public static class Send{
+        private Long idx;
+        private String title;
+        private String massage;
+    }
 
 }

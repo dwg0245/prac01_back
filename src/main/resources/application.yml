@@ -1,6 +1,6 @@
 # 내가 뭔가를 쓰고 싶을때 변수 처럼 쓴다.
-server:
-  port: 8083
+#server:
+#  port: 8083
 
 jwt:
   secret: ${JWT_SECRET}
@@ -13,9 +13,6 @@ project:
     #32 바이트 (32글자 여야 한다.)
     key: aessecretkey12345678912345678900
 
-project:
-  upload:
-    path: ${UPLOAD_PATH}
 
 spring:
   security:
@@ -66,6 +63,7 @@ spring:
             required: true
           auth: true
           timeout: 5000
+
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: ${DB_URL}
@@ -79,16 +77,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
-  cloud:
-    aws:
-      credentials:
-        access-key: ${AWS_ACCESS_KEY}
-        secret-key: ${AWS_SECRET_KEY}
-      s3:
-        bucket: ${S3_BUCKET}
-      region:
-        static: ap-northeast-2
 
 logging:
   level:

@@ -20,9 +20,16 @@ public class NotificationController {
     private final NotificationService notificationService;
 
     @PostMapping("/sub")
-    public ResponseEntity subscribe(@RequestBody NotificationDto.Subscribe dto){
+    public ResponseEntity subscribe(@RequestBody NotificationDto.Subscribe dto) {
         notificationService.subscribe(dto);
         return ResponseEntity.ok(BaseResponse.success("성공"));
     }
 
+    // 알림을 보내게 하고 싶다.
+    @PostMapping("/send")
+    public ResponseEntity send(@RequestBody NotificationDto.Send dto) {
+        notificationService.send(dto);
+
+        return ResponseEntity.ok("성공");
+    }
 }

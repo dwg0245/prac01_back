@@ -1,5 +1,3 @@
-package com.example;
-
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.security.KeyPair;

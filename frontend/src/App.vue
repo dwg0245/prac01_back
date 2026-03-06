@@ -1,5 +1,9 @@
 <script setup >
+import {ref} from "vue";
 import axios from "axios";
+
+const message = ref('');
+const socket = ref(null);
 
 const subscribePush = async ()=>{
   const permission = await Notification.requestPermission()
@@ -34,10 +38,34 @@ const subscribePush = async ()=>{
   }
 }
 
+
+
+const connectWebSocketService = ()=>{
+  // 백엔드(WebSocketConfig)에 적어두었던 주소와 맞아야 한다.
+  const ws = new WebSocket("ws://localhost:8080/ws")
+  // 메세지 보내기
+  socket.value = ws;
+
+  // 메세지를 받았을때 실행이 되는 코드
+  ws.onmessage = (massage) =>{
+    console.log("메세지를 받았을때 실행")
+    console.log(massage.data)
+  }
+}
+
+// 메세지 보내기 하면 보내게
+const sendMessage = ()=>{
+  socket.value.send(JSON.stringify(message.value))
+}
+
 </script>
 
 <template>
-  <button @click="subscribePush">알림 구독 </button>
+<!--   웹소켓 접속을 하고 메세지를 작성하고 메세지 전송을 한다. -->
+  <button @click="connectWebSocketService">웹 소켓 연결</button>
+  <input name="message" v-model="message"/>
+  <button @click="sendMessage">메세지 전송</button>
+  <button @click="subscribePush">알림 구독</button>
 </template>
 
 <style scoped>

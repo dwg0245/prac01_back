@@ -4,5 +4,5 @@ self.addEventListener("push", (event) =>{
 
     // 알림 띄우는 코드 '
     // 우리사이트가 아니어도 웹 브라우저가 켜져 있으면 알림을 받을 수 잇다.
-    event.waitUtill
+    // event.waitUtill
 })
