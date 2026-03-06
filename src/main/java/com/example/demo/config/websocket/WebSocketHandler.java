@@ -3,6 +3,7 @@ package com.example.demo.config.websocket;
 import com.example.demo.user.model.AuthUserDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -11,6 +12,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.util.HashSet;
 import java.util.Set;
 
+@Component
 @Slf4j
 public class WebSocketHandler extends TextWebSocketHandler {
     // 중복이 되지 않게 하기 위해서 set을 이용한다.

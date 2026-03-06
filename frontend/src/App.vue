@@ -1,10 +1,12 @@
 <script setup >
 import {ref} from "vue";
+import { Client } from '@stomp/stompjs'
 import axios from "axios";
 
 const message = ref('');
 const socket = ref(null);
 
+// 알림 보내기
 const subscribePush = async ()=>{
   const permission = await Notification.requestPermission()
   if(permission !=="granted"){
@@ -39,32 +41,70 @@ const subscribePush = async ()=>{
 }
 
 
+// 그냥  웹소켓
+// const connectWebSocketService = ()=>{
+//   // 백엔드(WebSocketConfig)에 적어두었던 주소와 맞아야 한다.
+//   const ws = new WebSocket("ws://localhost:8080/ws")
+//   // 메세지 보내기
+//   socket.value = ws;
+//
+//   // 메세지를 받았을때 실행이 되는 코드
+//   ws.onmessage = (massage) =>{
+//     console.log("메세지를 받았을때 실행")
+//     console.log(massage.data)
+//   }
+// }
 
-const connectWebSocketService = ()=>{
+
+// Stomp로 웹 소켓 연결 및 메세지 보내기
+const connectWebSocket = ()=>{
   // 백엔드(WebSocketConfig)에 적어두었던 주소와 맞아야 한다.
-  const ws = new WebSocket("ws://localhost:8080/ws")
+  const ws = new Client({
+    brokerURL: "ws://localhost:8080/ws"
+  });
+
   // 메세지 보내기
   socket.value = ws;
 
-  // 메세지를 받았을때 실행이 되는 코드
-  ws.onmessage = (massage) =>{
-    console.log("메세지를 받았을때 실행")
-    console.log(massage.data)
+  // 연결이 되었을때
+  ws.onConnect = ()=>{
+    console.log("웹 소켓 연결 성공")
+
+    // 토픽에 가입
+    ws.subscribe('/topic/test',(message)=>{
+      console.log(message)
+    })
   }
+
+  ws.activate()
 }
 
-// 메세지 보내기 하면 보내게
+// 메세지 보내기 하면 다른 사용자에게 메세지 보내지게 하기
+// const sendMessage = ()=>{
+//   socket.value.send(JSON.stringify(message.value))
+// }
+
+// stomp로 메세지 보내기
 const sendMessage = ()=>{
-  socket.value.send(JSON.stringify(message.value))
+  socket.value.publish({
+    destination: '/app/test',
+    body: JSON.stringify(message.value)
+  })
 }
+
+
 
 </script>
 
 <template>
 <!--   웹소켓 접속을 하고 메세지를 작성하고 메세지 전송을 한다. -->
   <button @click="connectWebSocketService">웹 소켓 연결</button>
-  <input name="message" v-model="message"/>
+  메세지 : <input name="message" v-model="message"/>
+  방번호 : <input name="room" v-model="roomIdx"/>
+
   <button @click="sendMessage">메세지 전송</button>
+
+  구독할 방 번호 : <input name="room" v-model="roomIdx"/>
   <button @click="subscribePush">알림 구독</button>
 </template>
 

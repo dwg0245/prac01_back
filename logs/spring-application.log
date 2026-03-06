@@ -266,3 +266,8 @@
 2026-03-06 14:38:12 [http-nio-8080-exec-3] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [ZWV4Vs8yrLpXPaSA6Hv0KQ]
 2026-03-06 14:38:12 [http-nio-8080-exec-3] TRACE org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [https://fcm.googleapis.com/fcm/send/fuB-ShGgUE4:APA91bEkB41OYdCLyXp646E3GMrq2_JJsVNscq1-D2XKY5QuXBk1AbHRAgLPlbdYguR9S2B2oormbjMPWera3UI46AS1MhRj3XtCaUPK7A5bfIiZ-J0jpmC0G99K589yLahuhFk7oF0Z]
 2026-03-06 14:38:12 [http-nio-8080-exec-3] TRACE org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [BLwfmu57MKBjYfyq08osPQuzyGSZGRONMSjMqq6Dasvk4ttn39Ned55KaqD1jcsNIUcV5ZlbTvtoNGdXBusc_ag]
+2026-03-06 15:11:33 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-06 15:11:33 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-03-06 15:11:33 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-06 15:11:33 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-06 15:11:33 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

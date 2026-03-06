@@ -1,4 +1,4 @@
-package com.example.demo.config.filter.interceptor;
+package com.example.demo.config.interceptor;
 
 import com.example.demo.user.model.AuthUserDetails;
 import com.example.demo.utils.JwtUtil;
@@ -12,13 +12,14 @@ import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import java.util.List;
 import java.util.Map;
 
+@Component
 @RequiredArgsConstructor
 // 핸드 쉐이크로 주입받아서 쓰겠다.
 public class JwtHandshakeInterceptor implements HandshakeInterceptor {
