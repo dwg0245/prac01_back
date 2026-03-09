@@ -2,6 +2,7 @@ package com.example.demo.board;
 
 import com.example.demo.common.model.BaseResponse;
 import com.example.demo.user.model.AuthUserDetails;
+import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 import com.example.demo.board.model.BoardDto;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequestMapping("/board")
 @RestController
 @RequiredArgsConstructor
+//@Observed // 이렇게 어노테이션을 달아주면 jaeger를 이용할 수 있음
 public class BoardController {
     private final BoardService boardService;
 

@@ -27,7 +27,7 @@ public class Board extends BaseEntity {
     private String contents;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userIdx")
+    @JoinColumn(name = "user_Idx")
     private User user;
 
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)

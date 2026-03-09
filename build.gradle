@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.5.10'
+    id 'org.springframework.boot' version '3.5.11'
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
 
     // 웹소켓 연결 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
@@ -60,6 +61,21 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+
+    //--------ㅓjaeger --------
+    // 1. Micrometer Tracing Bridge (OpenTelemetry 사용)
+    implementation 'io.micrometer:micrometer-tracing-bridge-otel'
+
+    // 2. OpenTelemetry Exporter (데이터를 Jaeger/OTLP로 전송)
+    implementation 'io.opentelemetry:opentelemetry-exporter-otlp'
+
+    // 3. Actuator (애플리케이션 상태 및 지표 노출)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // 프로메테우스 라이브러리
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
 }
 
 tasks.named('test') {

@@ -87,7 +87,7 @@ public class BoardDto {
     public static class ListRes {
         private Long idx;
         private String title;
-        private String username;
+        private long username;
         private long replySize;
         private int likes;
 
@@ -96,7 +96,7 @@ public class BoardDto {
             return ListRes.builder()
                     .idx(entity.getIdx())
                     .title(entity.getTitle())
-                    .username(entity.getUser().getName())
+                    .username(entity.getUser().getIdx())
                     .replySize(entity.getReplyList().size())
                     .likes(entity.getLikes().size())
                     .build();

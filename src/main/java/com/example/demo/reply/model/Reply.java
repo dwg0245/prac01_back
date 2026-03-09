@@ -20,11 +20,11 @@ public class Reply {
     private String contents;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "boardWriter")
+    @JoinColumn(name = "board_idx")
     private Board board;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userName")
+    @JoinColumn(name = "user_idx")
     private User user;
 
 }
