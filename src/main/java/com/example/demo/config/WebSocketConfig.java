@@ -27,7 +27,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
-                .addInterceptors(jwtHandshakeInterceptor)
+                // 토큰 확인
+//                .addInterceptors(jwtHandshakeInterceptor)
                 .setAllowedOrigins("*");
         // 웹 브라우저에서 WS 프로토콜을 지원하지 않는 경우 WS 대신에 HTTP로 통신할 수 있게 해주는 라이브러리를 사용할 때 설정
         //.withSockJS();
@@ -35,10 +36,11 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     }
 
     // 구독을 할때 인터셉터가 돌아야한다.
-    @Override
-    public void configureClientInboundChannel(ChannelRegistration registration) {
-        WebSocketMessageBrokerConfigurer.super.configureClientInboundChannel(registration);
-    }
+    // 토큰 확인
+//    @Override
+//    public void configureClientInboundChannel(ChannelRegistration registration) {
+//        registration.interceptors(checkRoomAuthInterceptor);
+//    }
 
     @Override
     // 구독한 사용자 모두 메세지를 보낸다.

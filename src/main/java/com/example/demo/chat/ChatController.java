@@ -8,6 +8,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 // 소켓 컴피그에 주소에 이 주소에 오면 실행을 해주겠다.
@@ -33,7 +35,25 @@ public class ChatController {
     private final SimpMessagingTemplate messagingTemplate;
     @MessageMapping("/chat/{roomIdx}")
     public void sendChatMessage(@DestinationVariable Long roomIdx,String message){
+        System.out.println("roomIdx : " + roomIdx);
         // 특정 토픽 방에 있는 유저에게 메세지를 보내라
         messagingTemplate.convertAndSend("/topic/"+roomIdx,message);
     }
+
+    // 제안 받은 부분
+    @MessageMapping("/webrtc")
+    @SendTo("/topic/webrtc")
+    // 데이터를 받을 때 json 형태로 받기
+    public Map<String,Object> webrtc(
+            // json으로 보내서 json으로 받아야 함
+            Map<String,Object> message
+    ){
+        System.out.println("webrtc");
+
+        System.out.println(""+message.get("offer"));
+
+        // 다른사람에게는 리턴 메세지가 간다.
+        return message;
+    }
+
 }
