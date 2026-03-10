@@ -40,4 +40,11 @@ public class BoardService {
     public void delete(Long idx) {
         boardRepository.deleteById(idx);
     }
+
+    public BoardDto.RegRes reg(Long userIdx, BoardDto.RegisterReq dto) {
+        Board board = dto.toEntity(userIdx);
+        board = boardRepository.save(board);
+
+        return BoardDto.RegRes.from(board);
+    }
 }

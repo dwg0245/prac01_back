@@ -1,11 +1,32 @@
 package com.example.demo.board.model;
 
 import com.example.demo.reply.model.ReplyDto;
+import com.example.demo.user.model.User;
 import lombok.*;
 
 import java.util.List;
 
 public class BoardDto {
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class RegisterReq{
+        private String title;
+        private String contents;
+
+        public Board toEntity(Long userIdx){
+            return Board.builder()
+                    .title(this.title)
+                    .contents(this.contents)
+                    .user(User.builder()
+                            .idx(userIdx)
+                            .build())
+                    .build();
+        }
+    }
+
     @Getter
     public static class RegReq {
         private String title;
@@ -19,18 +40,22 @@ public class BoardDto {
         }
     }
 
+
+
     @Builder
     @Getter
     public static class RegRes {
         private Long idx;
         private String title;
         private String contents;
+        private Long userIdx;
 
         public static RegRes from(Board entity) {
             return RegRes.builder()
                     .idx(entity.getIdx())
                     .title(entity.getTitle())
                     .contents(entity.getContents())
+                    .userIdx(entity.getUser().getIdx())
                     .build();
         }
     }
@@ -43,6 +68,7 @@ public class BoardDto {
         private String username;
         private long replySize;
         private int likes;
+
 
         public static ListRes from(Board entity) {
             return ListRes.builder()
