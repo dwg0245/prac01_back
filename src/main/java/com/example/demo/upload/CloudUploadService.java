@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-@Service
+
 public class CloudUploadService implements UploadService{
     @Value("${spring.cloud.aws.s3.bucket}")
     private String s3BucketName;
