@@ -120,7 +120,7 @@ public class BoardDto {
                     .contents(entity.getContents())
                     .username(entity.getUser().getName())
                     .reply(entity.getReplyList().stream().map(ReplyDto.Replyres::from).toList())
-                    .likes(entity.getLikes().size())
+                    .likes(entity.getLikesCount())
                     .build();
         }
     }
